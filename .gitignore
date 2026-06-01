@@ -1,0 +1,23 @@
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Data & generated output
+data/jobber.db
+data/output/
+data/profile/
+data/credentials.json
+data/_apply_*
+
+# Bundled tunnel binary
+tools/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+Thumbs.db
+.DS_Store

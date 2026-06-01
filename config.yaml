@@ -1,0 +1,54 @@
+# ============================================================
+#  Jobber configuration  —  edit this to control your search
+# ============================================================
+
+# What you're looking for
+search:
+  keywords:
+    - "digital marketing specialist"
+    - "PPC specialist"
+    - "SEM"
+    - "performance marketing"
+    - "marketing analyst"
+  location: "Toronto, Ontario"
+  country: "ca"              # Adzuna country code (ca = Canada)
+  remote_ok: true            # also include remote roles
+  max_results_per_source: 25
+
+# Filters applied to the results
+filters:
+  min_score: 50              # only show jobs the AI scores >= this (0-100).
+                             # Raise toward 70 once you add Adzuna (better local matches).
+  exclude_keywords:          # skip listings whose title contains any of these
+    - "unpaid"
+    - "commission only"
+  exclude_companies: []
+
+# Your details — used to fill out application forms
+applicant:
+  full_name: "Nasser Saleh"
+  email: "nassersaleh156@gmail.com"
+  phone: "(438) 988-6709"
+  location: "Toronto, Ontario, Canada"
+  linkedin: "https://www.linkedin.com/in/nasser-saleh/"
+  website: ""
+  # Common application questions:
+  authorized_to_work_canada: true
+  requires_visa_sponsorship: false
+  willing_to_relocate: false
+  years_experience: 3
+  languages: "English (native), Arabic (native)"
+
+# Optional: pull jobs straight from company career pages (free, very reliable).
+# Find the company "token" in its careers URL, e.g.
+#   boards.greenhouse.io/shopify   ->  greenhouse token is "shopify"
+#   jobs.lever.co/figma            ->  lever token is "figma"
+ats:
+  greenhouse: []
+  lever: []
+
+# Where the tailored resumes / cover letters get written
+output_dir: "data/output"
+
+# Path to your master resume (the AI tailors copies of this, never the original)
+resume_path: "data/profile/master_resume.docx"

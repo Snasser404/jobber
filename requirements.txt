@@ -1,0 +1,10 @@
+# Pinned <1.50: newer builds bundle very deeply-nested template files that
+# exceed Windows' 260-char path limit and fail to install on this machine.
+streamlit>=1.40,<1.50
+anthropic>=0.40
+requests>=2.31
+python-docx>=1.1
+python-dotenv>=1.0
+PyYAML>=6.0
+beautifulsoup4>=4.12
+playwright>=1.48
