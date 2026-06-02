@@ -43,7 +43,7 @@ def _rank_one(job: Job, system: str) -> RankedJob:
             title=job.title, company=job.company,
             location=job.location, description=job.description[:4000],
         ),
-        system=system, model=llm.RANK_MODEL, max_tokens=700, cache_system=True,
+        system=system, role="rank", max_tokens=700, cache_system=True,
     )
     return RankedJob(
         job=job,

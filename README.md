@@ -8,8 +8,9 @@ is ever sent without you.
 
 ## What it does
 
-1. **Find** — pulls listings from Remotive, RemoteOK, Arbeitnow, optional Adzuna
-   (Canada), and any company Greenhouse/Lever boards you list. No scraping, no ban risk.
+1. **Find** — pulls listings from **LinkedIn, Indeed, Glassdoor & Talent.com** (via the
+   JSearch / Google-for-Jobs API), **Adzuna** (Canada), remote boards (Remotive, RemoteOK,
+   Arbeitnow), and any company **Greenhouse/Lever** boards. Legit APIs — no scraping, no bans.
 2. **Rank** — Claude scores each job 0–100 against *your* resume, with reasons + gaps.
 3. **Tailor** — Claude rewrites your summary for the role and drafts a specific cover
    letter, using only your real experience. Saves both as `.docx`.
@@ -95,11 +96,31 @@ Open **🪵 Show assistant log** on a job to watch exactly what it did and where
 and add site logins (matched by domain). The assistant fills them on a login page but still
 pauses for 2FA/CAPTCHA and never submits the application. `credentials.json` is git-ignored.
 
+## AI model & cost (free or cheap options)
+
+Jobber uses **Claude** by default. To cut cost, point it at any **OpenAI-compatible**
+provider — no code change, just env vars (see `.env.example`):
+
+| Provider | Cost | Note |
+|---|---|---|
+| **OpenRouter** | free tier | Free DeepSeek/Qwen/Llama; one key, many models |
+| **DeepSeek** (direct) | ~pennies | Chinese, cheap, production-grade |
+| **Google Gemini** | free tier | Fast, high quality |
+| **Groq** | free | Very fast |
+| **Claude** | paid | Best quality (default) |
+
+Set `LLM_PROVIDER=openai`, `LLM_BASE_URL`, `LLM_API_KEY`, `LLM_MODEL`, then restart. The
+sidebar shows the active engine.
+
+**Production / distribution:** free tiers are rate-limited, so for many users prefer a cheap
+paid provider (DeepSeek) **or** have each user bring their own key (the app reads keys from
+env/secrets). Never ship your personal keys inside a distributed build.
+
 ## Notes
 
 - **Honesty:** tailoring and form-answers only use your real experience — they never invent
   jobs, dates, metrics, or skills, and never accept terms/consent for you.
-- **Cost:** ranking uses the cheap, fast Claude Haiku model (pennies for dozens of jobs);
-  cover letters and form-reading use Claude Sonnet. Resume text is cached to keep costs low.
+- **Cost:** ranking uses a cheap/fast model and writing a stronger one; with Claude that's
+  Haiku + Sonnet (pennies per batch). Résumé text is cached where supported to keep costs low.
 - **Submitting:** the browser step fills fields and uploads your files but **does not click
   submit** — that's your job, on purpose.

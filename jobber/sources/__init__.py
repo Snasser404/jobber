@@ -4,14 +4,15 @@ from __future__ import annotations
 from typing import Callable
 
 from ..models import Job
-from . import remotive, remoteok, arbeitnow, adzuna, greenhouse, lever
+from . import remotive, remoteok, arbeitnow, adzuna, greenhouse, lever, jsearch
 
 # name -> fetch(cfg) -> list[Job]
 SOURCES: dict[str, Callable[[dict], list[Job]]] = {
+    "jsearch": jsearch.fetch,      # LinkedIn/Indeed/Glassdoor/Talent.com via Google for Jobs
+    "adzuna": adzuna.fetch,
     "remotive": remotive.fetch,
     "remoteok": remoteok.fetch,
     "arbeitnow": arbeitnow.fetch,
-    "adzuna": adzuna.fetch,
     "greenhouse": greenhouse.fetch,
     "lever": lever.fetch,
 }

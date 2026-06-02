@@ -28,11 +28,22 @@ Click **Advanced settings → Secrets**, and paste the following — but replace
 with the **real one from your local `.env` file**:
 
 ```toml
+# AI engine — either keep Claude...
 ANTHROPIC_API_KEY = "sk-ant-...    (copy from your .env)"
-ADZUNA_APP_ID     = "4ebd280d"
-ADZUNA_APP_KEY    = "...           (copy from your .env)"
-JOBBER_PASSWORD   = "jobber-3f07d0 (or change it)"
-JOBBER_CLOUD      = "1"
+# ...or use a free/cheap model instead (then you can drop the Claude key):
+# LLM_PROVIDER = "openai"
+# LLM_BASE_URL = "https://openrouter.ai/api/v1"
+# LLM_API_KEY  = "..."
+# LLM_MODEL    = "deepseek/deepseek-chat-v3-0324:free"
+
+# Job sources
+ADZUNA_APP_ID  = "4ebd280d"
+ADZUNA_APP_KEY = "...              (copy from your .env)"
+RAPIDAPI_KEY   = "...              (JSearch key — LinkedIn/Indeed/Glassdoor)"
+
+# Online access
+JOBBER_PASSWORD = "737591274@jobber  (or change it)"
+JOBBER_CLOUD    = "1"
 ```
 
 ## 4. Deploy

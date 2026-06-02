@@ -116,7 +116,7 @@ def generate(ranked: RankedJob, profile: dict, cfg: dict) -> TailoredApplication
             description=job.description[:5000],
             keywords=", ".join(ranked.keywords) or "(none specified)",
         ),
-        system=system, model=llm.WRITE_MODEL,
+        system=system, role="write",
         max_tokens=2000, temperature=0.5, cache_system=True,
     )
     summary = str(data.get("summary", "")).strip()

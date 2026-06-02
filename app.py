@@ -10,7 +10,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from jobber import config, profile as profile_mod, store, analyze, auth
+from jobber import config, profile as profile_mod, store, analyze, auth, llm
 from jobber.sources import fetch_all
 from jobber.models import Job, RankedJob, TailoredApplication
 from jobber import rank as rank_mod
@@ -89,7 +89,7 @@ st.session_state.setdefault("ranked", [])     # list[RankedJob]
 st.session_state.setdefault("tailored", {})    # job_id -> TailoredApplication
 st.session_state.setdefault("stats", {})
 
-has_ai = config.has_anthropic_key()
+has_ai = llm.is_configured()
 find = False
 
 # ---------------------------------------------------------------- sidebar
@@ -97,7 +97,7 @@ with st.sidebar:
     st.title("🎯 Jobber")
     st.caption("Find → rank → tailor → review → apply")
 
-    st.write("AI engine (Claude):", "✅ ready" if has_ai else "❌ no key")
+    st.write(f"AI engine ({llm.label()}):", "✅ ready" if has_ai else "❌ no key")
     st.write("Adzuna jobs:", "✅ on" if config.has_adzuna_keys() else "➖ off (optional)")
 
     # ---- résumé (drives everything: search, ranking, tailoring) ----
@@ -154,10 +154,9 @@ with st.sidebar:
 
     if not has_ai:
         st.warning(
-            "Add your Claude API key to enable ranking, tailoring & résumé analysis:\n\n"
-            "1. Get a key at console.anthropic.com\n"
-            "2. Paste it into the `.env` file after `ANTHROPIC_API_KEY=`\n"
-            "3. Restart the app"
+            "No AI key set — needed for ranking, tailoring & résumé analysis. Use Claude, or a "
+            "cheaper/free model (OpenRouter free DeepSeek, DeepSeek, Gemini, Groq). "
+            "See `.env.example` for one-line setups, then restart."
         )
 
 

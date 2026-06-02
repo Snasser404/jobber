@@ -31,7 +31,7 @@ technical roles; if it leans marketing, return marketing roles."""
 def derive_search_profile(resume_text: str) -> dict:
     data = llm.complete_json(
         PROMPT.format(resume=resume_text[:8000]),
-        system=SYSTEM, model=llm.RANK_MODEL, max_tokens=700, temperature=0.2,
+        system=SYSTEM, role="rank", max_tokens=700, temperature=0.2,
     )
     keywords = [str(k).strip() for k in (data.get("keywords") or []) if str(k).strip()]
     return {

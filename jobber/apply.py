@@ -141,7 +141,7 @@ def plan_actions(extract: dict, answers: dict, cover: str):
         text=(extract.get("textSample", "") or "")[:1500],
         fields=json.dumps(fields, ensure_ascii=False),
     )
-    data = llm.complete_json(prompt, system=PLAN_SYSTEM, model=llm.WRITE_MODEL,
+    data = llm.complete_json(prompt, system=PLAN_SYSTEM, role="write",
                              max_tokens=1500, temperature=0.0)
     return data if isinstance(data, dict) else None
 
